@@ -3,14 +3,15 @@
     <h2>Список постов:</h2>
       <ul class="post__list" v-if="posts.length > 0">
   
-        <li class="post__list-block" :key="post" v-for="post in posts">
+        <li class="post__list-block" :key="post" v-for="post in posts" :class="{ 'post__list-block_active' : post.active }">
           <div class="post__list-block_wrapper">
             <div class="post__list-block_title">{{ post.title }}</div>
             <div class="post__list-block_body">{{ post.body }}</div>
           </div>
-          <button class="post__list-block_delete button"
+          <post-button class="post__list-block_delete button"
+          :class="{'button__active' : post.active }"
           @click="deletePost(post)">
-          Удалить</button>
+          Удалить</post-button>
         </li>
           
       </ul>
@@ -45,6 +46,9 @@
         justify-content: space-between;
         padding: 20px;
         margin-top: 20px;
+        &_active {
+          border: 2px solid green;
+        }
         &_title {
           font-size: 25px;
         }

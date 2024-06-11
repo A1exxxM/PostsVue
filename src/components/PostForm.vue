@@ -6,7 +6,7 @@
         <input type="text" required name="body" placeholder="Содержание поста" class="post__form-input"
         v-model="body">
       </div>
-      <button class="post__form-button button" @click.prevent="createPost">Создать</button>
+      <post-button class="post__form-button button" @click.prevent="createPost">Создать</post-button>
     </form>
 </template>
 
@@ -14,6 +14,7 @@
 export default {
     data() {
       return {
+
       body: '',
       title: '',
       id: 0
@@ -24,7 +25,8 @@ export default {
       const post = {
         body: this.body,
         title: this.title,
-        id: this.id++
+        id: this.id++,
+        active: false
       }
       this.$emit('create',post);
       this.body = '';

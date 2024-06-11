@@ -3,6 +3,10 @@
     <post-form
     @create="createPost"
     />
+    <post-search
+    :posts="posts"
+    @searchPost="searchPost"
+    />
     <post-list 
     :posts="posts"
     @delete="deletePost"
@@ -13,8 +17,9 @@
 <script>
 import PostForm from '@/components/PostForm.vue';
 import PostList from '@/components/PostRoster.vue';
+import PostSearch from '@/components/PostSearch.vue';
 export default {
-  components: { PostForm,PostList },
+  components: { PostForm,PostList,PostSearch },
   data() {
     return {
       posts: []
@@ -26,6 +31,17 @@ export default {
     },  
     deletePost(post) {
       this.posts = this.posts.filter(item => post.id != item.id)
+    },
+    searchPost(value) {
+      this.posts.forEach(post => {
+        post.active = false;
+        if(post.title.includes(value)) {
+          post.active = true
+        }
+        if (value == '') {
+          post.active = false
+        }
+      })
     }
   }
 }
@@ -41,14 +57,6 @@ body {
   margin: 0;
   box-sizing: border-box;
 }
-.button {
-    color: #fff;
-    font-size: 17px;
-    background-color: #000;
-    width: 150px;
-    height: 50px;
-    border: 1px solid red;
-    cursor: pointer;
-}
+
 
 </style>
