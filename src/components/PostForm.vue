@@ -1,17 +1,38 @@
 <template>
-    <form class="post__form">
+    <div class="post__modal" v-if="modal" @click="closeModal()">
+      <form @click.stop class="post__form">
+      <h2 class="post__form-title"> Cоздание поста № {{ posts.length + 1 }}</h2>
       <div class="post__form-wrapper">
-        <input type="text" required name="title" placeholder="Название поста" class="post__form-input"
-        v-model="title">
-        <input type="text" required name="body" placeholder="Содержание поста" class="post__form-input"
-        v-model="body">
+        <div class="post__form-inputs">
+          <label for="title">Название поста</label>
+          <input type="text" required="true" name="title" placeholder="Название поста" class="post__form-input"
+          v-model="title">
+        </div>
+        <div class="post__form-inputs">
+          <label for="body">Содержание поста</label>
+          <textarea type="text" required="true" name="body" placeholder="Содержание поста" class="post__form-input post__form-textarea"
+        v-model="body"></textarea>
+        </div>
+        
       </div>
-      <post-button class="post__form-button button" @click.prevent="createPost">Создать</post-button>
+      <post-button class=" button post__form-button" @click.prevent="createPost">Создать</post-button>
     </form>
+    </div>
+    
 </template>
 
 <script>
 export default {
+    props: {
+      modal: {
+        type: Boolean,
+        required: true
+      },
+      posts: {
+        type: Array,
+        required: true
+      }
+    },
     data() {
       return {
 
@@ -31,30 +52,63 @@ export default {
       this.$emit('create',post);
       this.body = '';
       this.title = '';
+    },
+    closeModal() {
+      this.$emit('close')
     }
     }
 }
 </script>
 
 <style lang="scss">
+.post__modal {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba($color: #000000, $alpha: 0.8);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
 .post__form {
-    width: 100%;
-    padding: 20px;
+    position: relative;
+    width: 400px;
+    height: 600px;
+    background-color: #fff;
+    padding: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-direction: column;
     border: 2px solid red;
-    margin-bottom: 20px;
+    margin: 0 auto;
+    margin-top: 100px;
+    border-radius: 10px;
     &-wrapper {
+      width: 100%;
       display: flex;
-      width: 50%;
-      justify-content: space-between;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-around;
     }
     &-input {
       border: 1px solid #000;
       color: #000;
       font-size: 17px;
       padding: 5px;
+      width: 100%;
     }
+    &-textarea {
+      resize: none;
+      min-height: 200px;
+    }
+    
+  }
+  label {
+    display: block;
+    margin-bottom: 10px;
   }
 </style>

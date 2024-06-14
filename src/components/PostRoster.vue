@@ -3,16 +3,7 @@
     <h2>Список постов:</h2>
       <ul class="post__list" v-if="posts.length > 0">
   
-        <li class="post__list-block" :key="post" v-for="post in posts" :class="{ 'post__list-block_active' : post.active }">
-          <div class="post__list-block_wrapper">
-            <div class="post__list-block_title">{{ post.title }}</div>
-            <div class="post__list-block_body">{{ post.body }}</div>
-          </div>
-          <post-button class="post__list-block_delete button"
-          :class="{'button__active' : post.active }"
-          @click="deletePost(post)">
-          Удалить</post-button>
-        </li>
+        <post-block :posts="posts" @testing="deletePost"/> 
           
       </ul>
       <div v-else>Постов пока нет, создайте новый!</div>
@@ -29,7 +20,7 @@
     },
     methods: {
       deletePost(post) {
-        this.$emit('delete',post);
+        this.$emit('delete', post);
       }
     }
   }
