@@ -7,8 +7,11 @@
     <post-form
     :modal="modal"
     :posts="posts"
+    :actionType="actionType"
+    :changingPost="currentChangingPost"
     @close="closeModal"
     @create="createPost"
+    @changePost="changePost"
     />
     <post-search
     :posts="posts"
@@ -17,6 +20,7 @@
     <post-list 
     :posts="posts"
     @delete="deletePost"
+    @openChanges="openChanges"
     />
   </div>
 </template>
@@ -31,7 +35,9 @@ export default {
   data() {
     return {
       posts: [],
-      modal: false
+      modal: false,
+      actionType: false,
+      currentChangingPost: 200
     }
   },
   methods: {
@@ -42,6 +48,15 @@ export default {
     deletePost(post) {
       console.log(post)
       this.posts = this.posts.filter(item => post.id != item.id)
+    },
+    openChanges(post) {
+      this.posts.forEach((item,i) => {
+        if (item.id == post.id) {
+          this.currentChangingPost = i;
+        }
+      })
+      this.actionType = false;
+      this.modal = true;
     },
     searchPost(value) {
       if (this.posts.length > 2) {
@@ -55,8 +70,18 @@ export default {
       })
       }
     },
+    changePost(changedPost) {
+      this.posts.forEach(post => {
+        if (post.id == changedPost.id) {
+          post.title = changedPost.title;
+          post.body = changedPost.body;
+        }
+        this.closeModal();
+      })
+    },
     openModal() {
       this.modal = true;
+      this.actionType = true;
     },
     closeModal() {
       this.modal = false;

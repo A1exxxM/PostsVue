@@ -1,7 +1,7 @@
 <template>
-    <div class="post__modal" v-if="modal" @click="closeModal()">
-      <form @click.stop class="post__form">
-      <h2 class="post__form-title"> Cоздание поста № {{ posts.length + 1 }}</h2>
+    <div class="post__modal" v-show="modal" @click="closeModal()">
+      <form @click.stop class="post__form" v-if="actionType">
+      <h2 class="post__form-title">Создание поста №{{ posts.length + 1 }}</h2>
       <div class="post__form-wrapper">
         <div class="post__form-inputs">
           <label for="title">Название поста</label>
@@ -17,6 +17,25 @@
       </div>
       <post-button class=" button post__form-button" @click.prevent="createPost">Создать</post-button>
     </form>
+    <form @click.stop class="post__form" v-else>
+      <h2 class="post__form-title">Изменение поста № {{ changingPost + 1 }}</h2>
+      <div class="post__form-wrapper">
+        <div class="post__form-inputs">
+          <label for="title">Название поста</label>
+          <input type="text" required="true" name="title" placeholder="Название поста" class="post__form-input"
+          v-model="changingTitle"
+          >
+        </div>
+        <div class="post__form-inputs">
+          <label for="body">Содержание поста</label>
+          <textarea type="text" required="true" name="body" placeholder="Содержание поста" class="post__form-input post__form-textarea"
+          v-model="changingBody"
+          ></textarea>
+        </div>
+        
+      </div>
+      <post-button class=" button post__form-button" @click.prevent="changePost">Изменить</post-button>
+    </form>
     </div>
     
 </template>
@@ -31,6 +50,14 @@ export default {
       posts: {
         type: Array,
         required: true
+      },
+      actionType: {
+        type: Boolean,
+        required: true
+      },
+      changingPost: {
+        type: Number,
+        required: true
       }
     },
     data() {
@@ -38,9 +65,21 @@ export default {
 
       body: '',
       title: '',
-      id: 0
+      id: 0,
+      changingTitle: '',
+      changingBody: '',
+      postCheck: 0
     }
     },
+    updated() {
+      try {
+        if (this.postCheck != this.changingPost) {
+          this.changingTitle = this.posts[this.changingPost].title;
+          this.changingBody = this.posts[this.changingPost].body;
+          this.postCheck = this.changingPost
+        } 
+      } catch {}
+    }, 
     methods: {
       createPost() {
       const post = {
@@ -55,7 +94,15 @@ export default {
     },
     closeModal() {
       this.$emit('close')
-    }
+    },
+    changePost() {
+      const changedPost = {
+        id: this.posts[this.changingPost].id,
+        title: this.changingTitle,
+        body: this.changingBody
+      }
+      this.$emit('changePost', changedPost)
+    },
     }
 }
 </script>

@@ -4,16 +4,24 @@
             <div class="post__list-block_title">{{ post.title }}</div>
             <div class="post__list-block_body">{{ post.body }}</div>
         </div>
-        <post-button class="post__list-block_delete button"
-        :class="{'button__active' : post.active }"
-        @click="deletePost(post)">
-        Удалить</post-button>
+        <div class="post__list-block_buttons">
+            <post-button class="post__list-block_button button"
+            :class="{'button__active' : post.active }"
+            @click="deletePost(post)">
+            Удалить</post-button>
+            <post-button class="post__list-block_button button"
+            :class="{'button__active' : post.active }"
+            @click="openChangePopup(post)">
+            Изменить</post-button>
+        </div>
+        
+        
     </li>
 </template>
 
 <script>
 export default {
-    emits:['testing'],
+    emits:['testing','openChangePopup'],
     name: 'post-block',
     props: {
         posts: {
@@ -24,8 +32,12 @@ export default {
     methods: {
         deletePost(post) {
             this.$emit('testing', post);
+        },
+        openChangePopup(post) {
+        this.$emit('openChangePopup', post)
         }
     }
+    
 }
 </script>
 
@@ -47,6 +59,12 @@ export default {
         }
         &_wrapper {
             width: 80%;
+        }
+        &_buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 25%;
+            
         }
         &_body {
             font-size: 17px;

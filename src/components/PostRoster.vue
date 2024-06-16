@@ -3,7 +3,7 @@
     <h2>Список постов:</h2>
       <ul class="post__list" v-if="posts.length > 0">
   
-        <post-block :posts="posts" @testing="deletePost"/> 
+        <post-block :posts="posts" @testing="deletePost" @openChangePopup="openChangePopup"/> 
           
       </ul>
       <div v-else>Постов пока нет, создайте новый!</div>
@@ -11,7 +11,7 @@
   
   <script>
   export default {
-    emits:['delete'],
+    emits:['delete', 'openChanges'],
     props: {
       posts: {
         type: Array,
@@ -21,6 +21,9 @@
     methods: {
       deletePost(post) {
         this.$emit('delete', post);
+      },
+      openChangePopup(post) {
+        this.$emit('openChanges', post)
       }
     }
   }
