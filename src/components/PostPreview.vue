@@ -4,7 +4,7 @@
     <h2 class="preview__subtitle">Количество постов: {{posts.length}}</h2>
     <div class="preview__buttons">
         <post-button class="button preview__button" @click="openModal">Создать пост</post-button>
-        <post-button class="button preview__button">Загрузить посты</post-button>
+        <post-button class="button preview__button" @click="loadPosts">Загрузить посты</post-button>
     </div>
     
   </div>
@@ -21,6 +21,9 @@ export default {
     methods: {
         openModal() {
             this.$emit('open')
+        },
+        loadPosts() {
+            this.$emit('load')
         }
     }
 }

@@ -3,6 +3,7 @@
     <post-preview
     :posts="posts"
     @open="openModal"
+    @load="loadPosts"
     />
     <post-form
     :modal="modal"
@@ -21,6 +22,12 @@
     :posts="posts"
     @delete="deletePost"
     @openChanges="openChanges"
+    :currentPage="currentPage"
+    />
+    <post-pages
+    :pages="pages"
+    :currentPage="currentPage"
+    @changePage="changePage"
     />
   </div>
 </template>
@@ -30,19 +37,26 @@ import PostForm from '@/components/PostForm.vue';
 import PostList from '@/components/PostRoster.vue';
 import PostSearch from '@/components/PostSearch.vue';
 import PostPreview from '@/components/PostPreview.vue';
+import PostPages from '@/components/PostPages.vue';
 export default {
-  components: {PostForm,PostList,PostSearch,PostPreview},
+  components: {PostForm,PostList,PostSearch,PostPreview,PostPages},
   data() {
     return {
       posts: [],
       modal: false,
       actionType: false,
-      currentChangingPost: 200
+      currentChangingPost: 200,
+      postId: 0,
+      pages: [1],
+      pagesCounter: 0,
+      currentPage: 0
     }
   },
   methods: {
     createPost(post) {
+      post.id = this.postId++;
       this.posts.push(post);
+      this.checkPages();
       this.modal = false;
     },  
     deletePost(post) {
@@ -85,6 +99,40 @@ export default {
     },
     closeModal() {
       this.modal = false;
+    },
+    loadPosts() {
+      const getResponse = async () =>{
+        let response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        return response.json();
+      }
+      getResponse()
+        .then(data => {
+          data.forEach(item => {
+            const post = {
+              title: item.title,
+              body: item.body,
+              id: this.postId++
+            }
+            this.posts.push(post);
+            this.checkPages();
+          });
+        });
+    },
+    checkPages() {
+      const test = this.pagesCounter;
+      this.pagesCounter = Math.floor(this.postId / 4.01);
+      if (test != this.pagesCounter) {
+        this.pages.push(this.pagesCounter + 1);
+      }
+      this.posts.forEach(post => {
+          if (post.page == undefined) {
+            post.page = this.pagesCounter;
+          }
+        });
+    },
+    changePage(page) {
+      console.log(page)
+      this.currentPage = page - 1;
     }
   }
 }

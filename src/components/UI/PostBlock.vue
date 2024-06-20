@@ -1,5 +1,5 @@
 <template>
-    <li class="post__list-block" :key="post" v-for="post in posts" :class="{ 'post__list-block_active' : post.active }">
+    <li class="post__list-block" :key="post" v-for="post in posts" :class="{ 'post__list-block_active' : post.active }" v-show="post.page == currentPage">
         <div class="post__list-block_wrapper">
             <div class="post__list-block_title">{{ post.title }}</div>
             <div class="post__list-block_body">{{ post.body }}</div>
@@ -26,6 +26,10 @@ export default {
     props: {
         posts: {
             type: Array,
+            required: true
+        },
+        currentPage: {
+            type: Number,
             required: true
         }
     },

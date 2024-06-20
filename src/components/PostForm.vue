@@ -65,7 +65,6 @@ export default {
 
       body: '',
       title: '',
-      id: 0,
       changingTitle: '',
       changingBody: '',
       postCheck: 0
@@ -85,7 +84,6 @@ export default {
       const post = {
         body: this.body,
         title: this.title,
-        id: this.id++,
         active: false
       }
       this.$emit('create',post);

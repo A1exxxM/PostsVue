@@ -3,7 +3,7 @@
     <h2>Список постов:</h2>
       <ul class="post__list" v-if="posts.length > 0">
   
-        <post-block :posts="posts" @testing="deletePost" @openChangePopup="openChangePopup"/> 
+        <post-block :currentPage="currentPage" :posts="posts" @testing="deletePost" @openChangePopup="openChangePopup"/> 
           
       </ul>
       <div v-else>Постов пока нет, создайте новый!</div>
@@ -15,6 +15,10 @@
     props: {
       posts: {
         type: Array,
+        required: true
+      },
+      currentPage: {
+        type: Number,
         required: true
       }
     },

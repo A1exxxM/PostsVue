@@ -1,0 +1,59 @@
+<template>
+  <ul class="post__pages" v-show="this.pages.length > 1">
+    <post-page class="post__pages-block" 
+    :class="{'post__pages-block_active': page == (this.currentPage + 1)}"
+    @click="changePage(page)"  
+    :key="page" 
+    v-for="page in pages">{{ page }}</post-page>
+  </ul>
+</template>
+
+<script>
+export default {
+    props: {
+        pages: {
+            type: Array,
+            required: true
+        },
+        currentPage: {
+            type: Number,
+            required: true
+        }
+    },
+    methods: {
+        changePage(page) {
+            this.$emit('changePage', page)
+        }
+    }
+}
+</script>
+
+<style lang="scss">
+    .post__pages {
+        width: fit-content;
+        padding: 0 10px;
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        &-block {
+            border: 1px solid red;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 20px;
+            background-color: #000;
+            margin-right: 10px;
+            cursor: pointer;
+            &_active {
+                border: 1px solid #000;
+                color: #000;
+                background-color: #fff;
+            }
+        }
+    }
+</style>
