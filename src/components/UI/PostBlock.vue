@@ -1,5 +1,11 @@
 <template>
-    <li class="post__list-block" :key="post" v-for="post in posts" :class="{ 'post__list-block_active' : post.active }" v-show="post.page == currentPage">
+    <li class="post__list-block"
+    :key="post" 
+    v-for="post in posts" 
+    :class="{ 'post__list-block_active' : post.active }" 
+    v-show="post.page == currentPage"
+    @click="$router.push(`/posts/${post.id}`)"
+    >
         <div class="post__list-block_wrapper">
             <div class="post__list-block_title">{{ post.title }}</div>
             <div class="post__list-block_body">{{ post.body }}</div>
@@ -7,11 +13,11 @@
         <div class="post__list-block_buttons">
             <post-button class="post__list-block_button button"
             :class="{'button__active' : post.active }"
-            @click="deletePost(post)">
+            @click.stop="deletePost(post)">
             Удалить</post-button>
             <post-button class="post__list-block_button button"
             :class="{'button__active' : post.active }"
-            @click="openChangePopup(post)">
+            @click.stop="openChangePopup(post)">
             Изменить</post-button>
         </div>
         
