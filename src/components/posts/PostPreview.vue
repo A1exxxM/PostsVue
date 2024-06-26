@@ -1,7 +1,7 @@
 <template>
   <div class="preview">
     <h1 class="preview__title">Приложение для создания постов</h1>
-    <h2 class="preview__subtitle">Количество постов: {{posts.length}}</h2>
+    <h2 class="preview__subtitle">Количество постов: {{$store.state.posts.length}}</h2>
     <div class="preview__buttons">
         <post-button class="button preview__button" @click="openModal">Создать пост</post-button>
         <post-button class="button preview__button" @click="loadPosts">Загрузить посты</post-button>
@@ -12,12 +12,6 @@
 
 <script>
 export default {
-    props: {
-        posts: {
-            type: Array,
-            required: true
-        }
-    },
     methods: {
         openModal() {
             this.$emit('open')

@@ -1,9 +1,9 @@
 <template>
     <li class="post__list-block"
     :key="post" 
-    v-for="post in posts" 
+    v-for="post in $store.state.posts" 
     :class="{ 'post__list-block_active' : post.active }" 
-    v-show="post.page == currentPage"
+    v-show="post.page == $store.state.currentPage"
     @click="$router.push(`/posts/${post.id}`)"
     >
         <div class="post__list-block_wrapper">
@@ -29,16 +29,6 @@
 export default {
     emits:['testing','openChangePopup'],
     name: 'post-block',
-    props: {
-        posts: {
-            type: Array,
-            required: true
-        },
-        currentPage: {
-            type: Number,
-            required: true
-        }
-    },
     methods: {
         deletePost(post) {
             this.$emit('testing', post);

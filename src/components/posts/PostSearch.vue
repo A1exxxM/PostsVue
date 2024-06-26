@@ -1,5 +1,5 @@
 <template>
-  <input v-model="value" v-if="posts.length > 2" @input="searchPost(value)" type="text" placeholder="Введите название поста">
+  <input v-model="value" v-if="$store.state.posts.length > 2" @input="searchPost(value)" type="text" placeholder="Введите название поста">
 </template>
 
 <script>
@@ -7,12 +7,6 @@ export default {
     data() {
         return {
             value: ''
-        }
-    },
-    props: {
-        posts: {
-            type: Array,
-            required: true
         }
     },
     methods: {

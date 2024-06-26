@@ -1,25 +1,15 @@
 <template>
-  <ul class="post__pages" v-show="this.pages.length > 1">
+  <ul class="post__pages" v-show="$store.state.pages.length > 1">
     <post-page class="post__pages-block" 
-    :class="{'post__pages-block_active': page == (this.currentPage + 1)}"
+    :class="{'post__pages-block_active': page == ($store.state.currentPage + 1)}"
     @click="changePage(page)"  
     :key="page" 
-    v-for="page in pages">{{ page }}</post-page>
+    v-for="page in $store.state.pages">{{ page }}</post-page>
   </ul>
 </template>
 
 <script>
 export default {
-    props: {
-        pages: {
-            type: Array,
-            required: true
-        },
-        currentPage: {
-            type: Number,
-            required: true
-        }
-    },
     methods: {
         changePage(page) {
             this.$emit('changePage', page)
