@@ -1,9 +1,9 @@
 <template>
-    <navbar-router></navbar-router>
+    <navbar-router class="animate__animated animate__fadeInDown"></navbar-router>
     <section class="main container">
-        <h1 class="main__title">Pet Project "Посты"</h1>
-        <h2 class="main__subtitle">В этом проекте реализована возможность создания, редактирования и удаления постов, поиска по названию, загрузки с JSON Placeholder</h2>
-        <ul class="main__description">
+        <h1 class="main__title animate__animated animate__fadeInLeft">Pet Project "Посты"</h1>
+        <h2 class="main__subtitle animate__animated animate__fadeInRight">В этом проекте реализована возможность создания, редактирования и удаления постов, поиска по названию, загрузки с JSON Placeholder</h2>
+        <ul class="main__description animate__animated animate__fadeInUp">
             <div class="main__description-title">Используемые технологии:</div>
             <div class="main__description-wrapper">
                 <li class="main__description-block">

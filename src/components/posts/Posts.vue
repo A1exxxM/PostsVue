@@ -35,10 +35,10 @@
     components: {PostForm,PostList,PostSearch,PostPreview,PostPages},
     methods: {
       createPost(post) {
-        this.$store.commit('createPost', post);
+        this.$store.dispatch('buildPost', post);
       },  
       deletePost(post) {
-        this.$store.commit('deletePost', post);
+        this.$store.dispatch('removePost', post);
       },
       openChanges(post) {
         this.$store.commit('openChanges', post);

@@ -1,8 +1,9 @@
 <template>
-    <li class="post__list-block"
+    <li class="post__list-block animate__animated animate__fadeIn"
     :key="post" 
     v-for="post in $store.state.posts" 
-    :class="{ 'post__list-block_active' : post.active }" 
+    :class="{'post__list-block_active' : post.active}"
+    
     v-show="post.page == $store.state.currentPage"
     @click="$router.push(`/posts/${post.id}`)"
     >
@@ -44,6 +45,7 @@ export default {
 
 <style lang="scss">
 .post__list {
+    min-height: 500px;
     &-block {
         border: 2px solid red;
         display: flex;

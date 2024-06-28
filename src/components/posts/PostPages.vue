@@ -25,9 +25,9 @@ export default {
         margin-top: 30px;
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
+        align-items: flex-start;
         &-block {
+            margin-top: 5px;
             border: 1px solid red;
             width: 50px;
             height: 50px;

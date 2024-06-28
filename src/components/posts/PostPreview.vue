@@ -25,7 +25,7 @@ export default {
 
 <style lang="scss">
     .preview {
-        height: 200px;
+        height: 190px;
         &__title {
             text-align: center;
         }
