@@ -57,12 +57,12 @@ export default {
             }
             &-block {
                 list-style-type: none;
-                background-color: #000;
-                border: 2px solid red;
+                background-color: #1c2541;
+                border: 2px solid #fefae0;
                 border-radius: 10px;
                 width: 300px;
                 height: 400px;
-                color: #fff;
+                color: #fefae0;
                 &_title {
                     height: 60px;
                     font-size: 30px;
@@ -73,7 +73,7 @@ export default {
                 &_divider {
                     width: 100%;
                     height: 1px;
-                    background-color: #fff;
+                    background-color: #fefae0;
                 }
                 &_descr {
                     font-size: 20px;

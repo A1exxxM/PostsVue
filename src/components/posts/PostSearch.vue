@@ -20,8 +20,9 @@ export default {
 
 <style lang="scss" scoped>
     input {
-        border: 2px solid red;
-        color: #000;
+        background-color: #1c2541;
+        border: 2px solid #fefae0;
+        color: #fefae0;
         font-size: 18px;
         padding: 5px;
         display: block;

@@ -1,7 +1,7 @@
 <template>
-  <navbar-router></navbar-router>
+  <navbar-router class="animate__animated animate__fadeInDown"></navbar-router>
   <div class="post container">
-    <div class="post__item animate__animated animate__fadeIn">
+    <div class="post__item animate__animated animate__fadeInUp">
       <h2 class="post__item-title">{{ $store.getters.getPost($route.params.id).title }}</h2>
       <div class="post__item-body">{{ $store.getters.getPost($route.params.id).body }}</div>
     </div>
@@ -19,13 +19,13 @@ export default {
     padding: 150px 0;
     &__item {
       padding: 20px;
-      background-color: #000;
+      background-color: #1c2541;
       width: 50%;
       margin: 0 auto;
       min-height: 600px;
-      border: 2px solid red;
+      border: 2px solid #fefae0;
       border-radius: 8px;
-      color: #fff;
+      color: #fefae0;
       &-title {
         text-align: center;
         font-size: 40px;

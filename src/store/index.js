@@ -16,6 +16,7 @@ export default createStore({
             pages: [1],
             pagesCounter: 0,
             currentPage: 0,
+            addDeleteClass: false,
         }
     },
 
@@ -64,6 +65,10 @@ export default createStore({
 
         closeModal(state) {
             state.modal = false;
+        },
+
+        switchDeleteClass(state) {
+            state.addDeleteClass = !state.addDeleteClass;
         },
 
         checkPages(state) {
@@ -128,8 +133,12 @@ export default createStore({
           context.commit('checkPages');  
         },
         removePost(context,post) {
-            context.commit('deletePost', post);
-            context.commit('checkPages');
+            context.commit('switchDeleteClass');
+            setTimeout(()=> {
+                context.commit('deletePost', post);
+                context.commit('checkPages');
+                context.commit('switchDeleteClass');
+            },700)
         }
       }
 })

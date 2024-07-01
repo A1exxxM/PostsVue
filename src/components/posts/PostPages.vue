@@ -28,21 +28,21 @@ export default {
         align-items: flex-start;
         &-block {
             margin-top: 5px;
-            border: 1px solid red;
+            border: 1px solid #fefae0;
             width: 50px;
             height: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #fff;
+            color: #fefae0;
             font-size: 20px;
-            background-color: #000;
+            background-color: #1c2541;
             margin-right: 10px;
             cursor: pointer;
             &_active {
-                border: 1px solid #000;
-                color: #000;
-                background-color: #fff;
+                border: 1px solid #1c2541;
+                color: #1c2541;
+                background-color: #fefae0;
             }
         }
     }

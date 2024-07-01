@@ -1,6 +1,6 @@
 <template>
-    <navbar-router></navbar-router>
-    <div class="container" id="posts">
+    <navbar-router class="animate__animated animate__fadeInDown"></navbar-router>
+    <div class="container animate__animated animate__fadeIn" id="posts">
       <post-preview
       @open="openModal"
       @load="loadPosts"

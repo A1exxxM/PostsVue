@@ -1,5 +1,5 @@
 <template>
-    <div class="post__modal" v-show="$store.state.modal" @click="closeModal()">
+    <div class="post__modal animate__animated animate__fadeIn" v-show="$store.state.modal" @click="closeModal()">
       <form @click.stop class="post__form" v-if="$store.state.actionType">
       <h2 class="post__form-title">Создание поста №{{ $store.state.posts.length + 1 }}</h2>
       <div class="post__form-wrapper">
@@ -91,13 +91,13 @@ export default {
     position: relative;
     width: 400px;
     height: 600px;
-    background-color: #fff;
+    background-color: #b8b8ff;
     padding: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    border: 2px solid red;
+    border: 2px solid #1c2541;
     margin: 0 auto;
     margin-top: 100px;
     border-radius: 10px;
@@ -109,8 +109,9 @@ export default {
       justify-content: space-around;
     }
     &-input {
-      border: 1px solid #000;
-      color: #000;
+      background-color: #1c2541;
+      border: 1px solid #fefae0;
+      color: #fefae0;
       font-size: 17px;
       padding: 5px;
       width: 100%;

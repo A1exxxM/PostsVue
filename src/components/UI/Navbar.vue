@@ -19,7 +19,8 @@ export default {
     top: 0;
     height: 80px;
     width: 100%;
-    background-color: #000;
+    background-color: #1c2541;
+    z-index: 100;
     &__menu {
       display: flex;
       align-items: center;
@@ -28,7 +29,7 @@ export default {
       height: 100%;
       &-item {
         list-style-type: none;
-        color: #fff;
+        color: #fefae0;
         font-size: 25px;
         cursor: pointer;
       }
