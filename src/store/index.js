@@ -16,7 +16,6 @@ export default createStore({
             pages: [1],
             pagesCounter: 0,
             currentPage: 0,
-            addDeleteClass: false,
         }
     },
 
@@ -27,15 +26,25 @@ export default createStore({
     },
 
     mutations: {
+
         deletePost(state,post) {
             state.posts = state.posts.filter(item => post.id != item.id);
             state.postsCounter--;
+            let currentPost = 0;
+            for (let k = 0; k < state.pagesCounter ; k++) {
+                for (let i = 0; i < 4; i++) {
+                    state.posts[currentPost].page = k;
+                    currentPost++;
+                }
+            }
         },
+
         createPost(state,post) {
             post.id = state.postId++;
             state.postsCounter++;
             state.posts.push(post);
         },
+
         searchPost(state,value) {
             if (state.posts.length > 2) {
                 state.posts.forEach(post => {
@@ -47,6 +56,7 @@ export default createStore({
                 }
             })}
         },
+
         openChanges(state,post) {
             state.posts.forEach((item,i) => {
                 if (item.id == post.id) {
@@ -57,7 +67,8 @@ export default createStore({
             })
             state.actionType = false;
             state.modal = true;
-            },
+        },
+
         openModal(state) {
             state.modal = true;
             state.actionType = true;
@@ -67,8 +78,13 @@ export default createStore({
             state.modal = false;
         },
 
-        switchDeleteClass(state) {
-            state.addDeleteClass = !state.addDeleteClass;
+        switchDeleteClass(state, post) {
+            const posts = document.querySelectorAll('.post__list-block_wrapper');
+            posts.forEach(item => {
+                if(item.getAttribute('id') == post.id) {
+                    item.parentElement.classList.add('animate__fadeOut')
+                }
+            })
         },
 
         checkPages(state) {
@@ -79,18 +95,8 @@ export default createStore({
               state.currentPage++;
             } else if(test > state.pagesCounter) {
                 state.pages.pop();
-                if (state.currentPage != 0) {
+                if (state.currentPage > state.pagesCounter) {
                     state.currentPage--;
-                }
-                let currentPost = 0;
-                for (let i = 0; i++; i <= state.pagesCounter) {
-                    let counter = 0;
-                    for (currentPost; counter++; counter < 4) {
-                        try {
-                            state.posts[currentPost].page = i;
-                            currentPost++;
-                        } catch {}
-                    }
                 }
             }
             state.posts.forEach(post => {
@@ -133,11 +139,10 @@ export default createStore({
           context.commit('checkPages');  
         },
         removePost(context,post) {
-            context.commit('switchDeleteClass');
+            context.commit('switchDeleteClass', post);
             setTimeout(()=> {
                 context.commit('deletePost', post);
                 context.commit('checkPages');
-                context.commit('switchDeleteClass');
             },700)
         }
       }

@@ -1,9 +1,10 @@
 <template>
 
     <h2 class="subtitle">Список постов:</h2>
-      <ul class="post__list" v-if="$store.state.posts.length > 0">
-  
-        <post-block
+      <ul 
+      class="post__list" v-if="$store.state.posts.length > 0" >
+        
+        <post-block 
         @testing="deletePost"
         @openChangePopup="openChangePopup"
         /> 
